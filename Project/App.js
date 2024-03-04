@@ -1,16 +1,31 @@
 import { StatusBar } from 'expo-status-bar';
-import {Text, View } from 'react-native';
-import { css } from './assets/css/css';
+import { StyleSheet, Text, View, Button, Alert } from 'react-native';
+import { css } from './assets/css/Css';
+import React, {useState, useEffect} from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Home, Login, Rastreio } from './views';
 
 export default function App() {
+
+  const Stack = createNativeStackNavigator();
+
   return (
-    <View style={css.container}>
-      <view style={css.map}>
-
-      </view>
-      <view style={css.search}>
-
-      </view>
-    </View>
-  );
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen 
+          name="Home"
+          component={Home} 
+          options={{
+            title:'WEIFLog',
+            headerStyle: {backgroundColor: '#f58634'},
+            headerTintColor: '#333',
+            headerTitleStyle: {fontWeight: 'bold', alignSelf: 'center'}
+          }}/>
+        <Stack.Screen name="Login" options={{headerShown:false}} component={Login} />
+        <Stack.Screen name="Rastreio" component={Rastreio} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
 }
+
